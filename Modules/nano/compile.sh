@@ -6,7 +6,7 @@ export CFLAGS="${CFLAGS} -I$(pwd)/ncurses/include -I$(pwd)/ncurses/include/ncurs
 export LDFLAGS="${LDFLAGS} -L$(pwd)/ncurses/lib"
 export CPPFLAGS="${CPPFLAGS} -I$(pwd)/ncurses/include -I$(pwd)/ncurses/include/ncursesw"
 NANO_VERSION=5.6.1
-NCURSES_VERSION=5.9
+NCURSES_VERSION=6.2
 
 ##compile ncurses
 
@@ -14,17 +14,16 @@ if [ ! -d ncurses-$NCURSES_VERSION ]
 then
 	wget ftp://ftp.invisible-island.net/ncurses/ncurses-$NCURSES_VERSION.tar.gz
 	tar xf ncurses-$NCURSES_VERSION.tar.gz
-    patch -p1 < ncurses.patch
 fi
 
 cd ncurses-$NCURSES_VERSION
-./configure --prefix=$NCURSES_PATH --host=mipsel-linux --target=mipsel-linux --without-manpages --without-normal --without-progs --without-debug --enable-widec --with-termlib --with-fallbacks=xterm-256color
+./configure --prefix=$NCURSES_PATH --host=mipsel-linux --target=mipsel-linux --without-manpages --without-normal --without-progs --without-debug --enable-widec --with-termlib --with-fallbacks=xterm-256color --enable-ext-colors
 
 make
 make install
 cd ..
 
-ln -s $NCURSES_PATH/lib/libtinfow.a $NCURSES_PATH/lib/libtinfo.a
+ln -sf $NCURSES_PATH/lib/libtinfow.a $NCURSES_PATH/lib/libtinfo.a
 
 ###compile nano
 
