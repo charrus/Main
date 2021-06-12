@@ -11,7 +11,7 @@ set -e # fail out if any step fails
 if [ ! -d portable/.git ]; then
     git clone https://github.com/libressl-portable/portable.git
     cd portable
-#    git checkout OPENBSD_6_6
+    git checkout OPENBSD_6_6
     sed -i 's/program_invocation_short_name/"?"/g' crypto/compat/getprogname_linux.c
     cd ..
 fi
