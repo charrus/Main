@@ -14,6 +14,7 @@ if [ ! -d ncurses-$NCURSES_VERSION ]
 then
 	wget ftp://ftp.invisible-island.net/ncurses/ncurses-$NCURSES_VERSION.tar.gz
 	tar xf ncurses-$NCURSES_VERSION.tar.gz
+    patch -p1 < ncurses.patch
 fi
 
 cd ncurses-$NCURSES_VERSION
